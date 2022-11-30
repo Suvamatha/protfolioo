@@ -1,8 +1,51 @@
-body{
-    background-color: rgb(88, 44, 124);
-    font-family: sans-serif;
+*{
+  left: 0%;
+  top: 0%;
 }
-.sign-up{
-    position: absolute;
-  
+body{
+ background-color: black;
+ background-size: cover;
+ background-repeat: no-repeat;
+}
+.hero{
+  color: antiquewhite;
+  font-size: 30px;
+  font-family: sans-serif;
+
+}
+.name{
+  position: relative;
+  font-size: 67px;
+  align-items: center;
+  justify-content: center;
+ display: flex;
+ margin-top:8%;
+ text-decoration: none;
+}
+.backvdo{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.social{
+  display: flex;
+  width: 50%;
+  height: 100%;
+  align-items: center;
+  list-style: none;
+  margin-left: 53%;
+  color: aliceblue;
+  text-decoration: none;
+}
+.social li{
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  margin-left: 8%;
+  cursor: pointer;
+  transition: 0.5s;
+  text-decoration: none;
+  color: white;
+  display: block;
 }
