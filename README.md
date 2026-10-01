@@ -1,16 +1,44 @@
-# React + Vite
+# Suvam Shrestha — Flutter Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript + Tailwind CSS v4 personal portfolio, built with `motion/react` for animation.
 
-Currently, two official plugins are available:
+## Stack
+- React 19 + TypeScript, bundled with Vite
+- Tailwind CSS v4 (via `@tailwindcss/vite`)
+- `motion/react` for scroll reveals, hero entrance, and micro-interactions
+- `react-icons` (Phosphor set) for icons
+- Self-hosted fonts via `@fontsource` (Outfit + Manrope)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting started
 
-## React Compiler
+```bash
+npm install
+npm run dev       # start local dev server
+npm run build     # production build to dist/
+npm run preview   # preview the production build
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Editing content
 
-## Expanding the ESLint configuration
+Almost everything text-based (name, bio, skills, projects, experience, contact links)
+lives in **`src/data/content.ts`** — edit that one file to update the site without
+touching components.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Things still marked as placeholders to fill in yourself:
+- `profile.linkedin` — add your LinkedIn URL
+- Any project links you'd rather swap or add (Real Estate app currently has no
+  public link since it was built during an internship)
+
+## Project structure
+
+```
+src/
+  data/content.ts       <- all editable copy & links
+  components/           <- one component per section + shared Reveal/Magnetic helpers
+  index.css             <- Tailwind v4 theme tokens (colors, fonts)
+```
+
+## Design notes
+- Palette: warm paper background, cobalt blue + clay orange + sage accents (no dark-navy/purple gradients).
+- Typography: Outfit (display) + Manrope (body).
+- Motion respects `prefers-reduced-motion` throughout.
