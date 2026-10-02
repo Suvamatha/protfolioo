@@ -50,6 +50,21 @@ export const skills = [
   },
 ] as const;
 
+// Live demos are hosted by FlutterShow (github.com/Suvamatha/flutter_app_demo_web).
+// Set this to wherever FlutterShow is deployed, e.g. "https://fluttershow.vercel.app".
+// You can also override it with VITE_FLUTTERSHOW_URL in a .env file.
+export const fluttershow = {
+  url: (import.meta.env.VITE_FLUTTERSHOW_URL as string | undefined) ?? "http://localhost:5173",
+};
+
+export type Demo = {
+  /** FlutterShow demo id — the folder name under FlutterShow's demos/ (e.g. "suvamatha-health-app"). */
+  id: string;
+  /** Status-bar colour inside the phone frame. */
+  statusBar?: "light" | "dark";
+  background?: string;
+};
+
 export type Project = {
   name: string;
   oneLiner: string;
@@ -59,6 +74,7 @@ export type Project = {
   link?: string;
   linkLabel?: string;
   status?: "Live" | "In progress" | "Private";
+  demo?: Demo;
 };
 
 export const projects: Project[] = [
@@ -73,6 +89,7 @@ export const projects: Project[] = [
     link: "https://github.com/Suvamatha/health_app",
     linkLabel: "View on GitHub",
     status: "Live",
+    demo: { id: "suvamatha-health-app", background: "#f4faf9" },
   },
   {
     name: "Flood Foresight",
@@ -95,6 +112,22 @@ export const projects: Project[] = [
     challenge:
       "Implemented BLoC/Cubit with a layered, clean-architecture approach so search, filtering, pagination, maps, galleries, and favorites could all integrate with a REST API via Dio without the codebase becoming unmanageable.",
     status: "Private",
+  },
+];
+
+// Smaller apps shown as live, playable phones under the main projects.
+export const miniDemos: { name: string; blurb: string; repo: string; demo: Demo }[] = [
+  {
+    name: "Medicine Tracker",
+    blurb: "Daily doses, progress and reminders.",
+    repo: "https://github.com/Suvamatha/medicineTrackerApp",
+    demo: { id: "suvamatha-medicinetrackerapp" },
+  },
+  {
+    name: "Calculator",
+    blurb: "A tidy calculator with a dark UI.",
+    repo: "https://github.com/Suvamatha/calculatorAPP",
+    demo: { id: "suvamatha-calculatorapp", statusBar: "light", background: "#000000" },
   },
 ];
 

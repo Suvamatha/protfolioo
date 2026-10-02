@@ -42,3 +42,15 @@ src/
 - Palette: warm paper background, cobalt blue + clay orange + sage accents (no dark-navy/purple gradients).
 - Typography: Outfit (display) + Manrope (body).
 - Motion respects `prefers-reduced-motion` throughout.
+
+## Live Flutter demos (FlutterShow)
+
+Project cards with a `demo` field in `src/data/content.ts` get a **Try live demo** button and a
+live phone preview. Demos are served by FlutterShow (`flutter_app_demo_web` repo):
+
+- App inside the phone: `<FLUTTERSHOW_URL>/demos/<demo id>/`
+- Shareable page: `<FLUTTERSHOW_URL>/d/<demo id>`
+
+Locally, run FlutterShow with `npm run dev` (port 5173) next to this site. In production, deploy
+FlutterShow and set `VITE_FLUTTERSHOW_URL` (see `.env.example`) — or edit `fluttershow.url` in `content.ts`.
+To add a demo: build the repo in FlutterShow, then add `demo: { id: "<owner>-<repo>" }` to the project.
