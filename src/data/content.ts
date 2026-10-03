@@ -50,33 +50,45 @@ export const skills = [
   },
 ] as const;
 
-// Live demos are hosted by FlutterShow (github.com/Suvamatha/flutter_app_demo_web).
-// Set this to wherever FlutterShow is deployed, e.g. "https://fluttershow.vercel.app".
-// You can also override it with VITE_FLUTTERSHOW_URL in a .env file.
+// ─── Live demos ────────────────────────────────────────────────────────────
+// Demos come from FlutterShow (your flutter_app_demo_web site). The portfolio
+// reads <url>/demos/index.json and matches each project by its GitHub `repo`.
+// So to show a live demo you only need to build the repo in FlutterShow —
+// nothing to change here. Override with VITE_FLUTTERSHOW_URL in a .env file.
 export const fluttershow = {
-  url: (import.meta.env.VITE_FLUTTERSHOW_URL as string | undefined) ?? "http://localhost:5173",
-};
-
-export type Demo = {
-  /** FlutterShow demo id — the folder name under FlutterShow's demos/ (e.g. "suvamatha-health-app"). */
-  id: string;
-  /** Status-bar colour inside the phone frame. */
-  statusBar?: "light" | "dark";
-  background?: string;
+  url: (import.meta.env.VITE_FLUTTERSHOW_URL as string | undefined) || "https://flutter-app-demo-web.vercel.app",
+  /** Show every other FlutterShow demo in the "Playground" under your projects. */
+  playground: true,
+  /** Repo URLs to keep out of the Playground. */
+  hideFromPlayground: [] as string[],
 };
 
 export type Project = {
   name: string;
   oneLiner: string;
-  problem: string;
+  problem?: string;
   tech: string[];
   challenge: string;
+  /** GitHub repo of the Flutter app — used to find its live demo automatically. */
+  repo?: string;
+  /** Link button (defaults to `repo`). */
   link?: string;
   linkLabel?: string;
   status?: "Live" | "In progress" | "Private";
-  demo?: Demo;
+  /** Small pill above the title, e.g. "NOSK Hackathon". */
+  badge?: string;
+  /** Background art beside the phone. */
+  visual?: "wellspring" | "flood" | "realEstate";
+  /**
+   * No live demo (private or source not public)? Put real screenshots in
+   * public/projects/ and list them here — they play as a slideshow in the phone.
+   */
+  screenshots?: string[];
+  /** Force a specific FlutterShow demo id (normally auto-detected from `repo`). */
+  demoId?: string;
 };
 
+// Add a project = add an object here. Order here = order on the page.
 export const projects: Project[] = [
   {
     name: "Wellspring",
@@ -86,22 +98,23 @@ export const projects: Project[] = [
     tech: ["Flutter", "Dart", "BLoC/Cubit", "GetIt", "Freezed", "GoRouter"],
     challenge:
       "Designed a scalable feature architecture (BLoC/Cubit + GetIt + Freezed) so journaling, reminders, and an XP/streak system could ship independently without tangled state — plus a custom, accessible design system for the whole app.",
-    link: "https://github.com/Suvamatha/health_app",
+    repo: "https://github.com/Suvamatha/health_app",
     linkLabel: "View on GitHub",
     status: "Live",
-    demo: { id: "suvamatha-health-app", background: "#f4faf9" },
+    visual: "wellspring",
   },
   {
     name: "Flood Foresight",
     oneLiner: "A cross-platform flood prediction and monitoring app built for the NOSK Hackathon.",
-    problem:
-      "Communities at flood risk need early, clear warnings — built and shipped within a tight hackathon timeline as a team.",
     tech: ["Flutter", "Firebase"],
     challenge:
       "Delivered a working prediction-and-monitoring flow end to end under hackathon time pressure, using Firebase for real-time backend data while collaborating across a team on feature ownership.",
-    link: "https://github.com/Noskathon-Lite/flood_Foresight",
+    repo: "https://github.com/Noskathon-Lite/flood_Foresight",
     linkLabel: "View on GitHub",
     status: "Live",
+    badge: "NOSK Hackathon",
+    visual: "flood",
+    screenshots: [],
   },
   {
     name: "Real Estate Mobile Application",
@@ -112,22 +125,9 @@ export const projects: Project[] = [
     challenge:
       "Implemented BLoC/Cubit with a layered, clean-architecture approach so search, filtering, pagination, maps, galleries, and favorites could all integrate with a REST API via Dio without the codebase becoming unmanageable.",
     status: "Private",
-  },
-];
-
-// Smaller apps shown as live, playable phones under the main projects.
-export const miniDemos: { name: string; blurb: string; repo: string; demo: Demo }[] = [
-  {
-    name: "Medicine Tracker",
-    blurb: "Daily doses, progress and reminders.",
-    repo: "https://github.com/Suvamatha/medicineTrackerApp",
-    demo: { id: "suvamatha-medicinetrackerapp" },
-  },
-  {
-    name: "Calculator",
-    blurb: "A tidy calculator with a dark UI.",
-    repo: "https://github.com/Suvamatha/calculatorAPP",
-    demo: { id: "suvamatha-calculatorapp", statusBar: "light", background: "#000000" },
+    badge: "Internship",
+    visual: "realEstate",
+    screenshots: [],
   },
 ];
 

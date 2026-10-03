@@ -45,12 +45,33 @@ src/
 
 ## Live Flutter demos (FlutterShow)
 
-Project cards with a `demo` field in `src/data/content.ts` get a **Try live demo** button and a
-live phone preview. Demos are served by FlutterShow (`flutter_app_demo_web` repo):
+Live demos come from FlutterShow (https://flutter-app-demo-web.vercel.app). The site reads
+`<FlutterShow>/demos/index.json` and matches each project by its GitHub `repo`. **You never need
+demo IDs.**
 
-- App inside the phone: `<FLUTTERSHOW_URL>/demos/<demo id>/`
-- Shareable page: `<FLUTTERSHOW_URL>/d/<demo id>`
+### Add a new project — no code help needed
 
-Locally, run FlutterShow with `npm run dev` (port 5173) next to this site. In production, deploy
-FlutterShow and set `VITE_FLUTTERSHOW_URL` (see `.env.example`) — or edit `fluttershow.url` in `content.ts`.
-To add a demo: build the repo in FlutterShow, then add `demo: { id: "<owner>-<repo>" }` to the project.
+1. Build it: open FlutterShow → **New Project** → paste the GitHub URL. Wait ~5 minutes.
+   → It shows up automatically in the **Playground** section of this site.
+2. Want it as a big featured project? Add one object to `projects` in `src/data/content.ts`:
+
+```ts
+{
+  name: "My New App",
+  oneLiner: "One sentence about it.",
+  tech: ["Flutter", "Dart"],
+  challenge: "The hardest part and how you solved it.",
+  repo: "https://github.com/Suvamatha/my_new_app",   // ← the demo is found from this
+  linkLabel: "View on GitHub",
+  visual: "wellspring",            // "wellspring" | "flood" | "realEstate" (background art)
+},
+```
+
+Each project's phone shows, in order: the live demo → your `screenshots` → a "coming soon" screen.
+
+- **Private app / no public code?** Put screenshots in `public/projects/` and add
+  `screenshots: ["/projects/app-1.png", "/projects/app-2.png"]`. They play as a slideshow.
+- **Hide a demo from the Playground:** add its repo URL to `fluttershow.hideFromPlayground`.
+- **Different FlutterShow?** Set `VITE_FLUTTERSHOW_URL` (see `.env.example`).
+
+Dev server runs on port 5174, so it never clashes with FlutterShow on 5173.
